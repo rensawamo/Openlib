@@ -52,6 +52,7 @@ void main() async {
 
   runApp(
     ProviderScope(
+      // デフォルトのprovider の値をoverride
       overrides: [
         dbProvider.overrideWithValue(dataBase),
         themeModeProvider.overrideWith(

@@ -25,6 +25,7 @@ List<String> _reorderMirrors(List<String> mirrors) {
   return [...ipfsMirrors, ...httpsMirrors];
 }
 
+// 生きている ミラーのサイトを返す
 Future<String?> _getAliveMirror(List<String> mirrors) async {
   Dio dio = Dio();
   for (var url in mirrors) {
@@ -46,6 +47,7 @@ Future<void> downloadFile(
     {required List<String> mirrors,
     required String md5,
     required String format,
+    // provider で 状態をリアルタイムで更新するための関数
     required Function onStart,
     required Function onProgress,
     required Function cancelDownlaod,
@@ -67,13 +69,14 @@ Future<void> downloadFile(
     // print(orderedMirrors[0]);
 
     if (workingMirror != null) {
-      onStart();
+      onStart();  // run 状態に戻す
       try {
         CancelToken cancelToken = CancelToken();
         dio.download(
           workingMirror,
           path,
           options: Options(headers: {
+            //このヘッダーは、リクエストを行っているクライアント（この場合はブラウザ）に関する情報をサーバーに提供. ブラウザの最適化
             'Connection': 'Keep-Alive',
             'User-Agent':
                 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'

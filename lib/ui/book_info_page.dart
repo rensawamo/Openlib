@@ -47,7 +47,7 @@ class BookInfoPage extends ConsumerWidget {
         titleTextStyle: Theme.of(context).textTheme.displayLarge,
       ),
       body: bookInfo.when(
-        skipLoadingOnRefresh: false,
+        skipLoadingOnRefresh: false, // skip loading on refresh
         data: (data) {
           return BookInfoWidget(
               data: data, child: ActionButtonWidget(data: data));
@@ -167,7 +167,7 @@ class ActionButtonWidget extends ConsumerStatefulWidget {
 class _ActionButtonWidgetState extends ConsumerState<ActionButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    final isBookExist = ref.watch(checkIdExists(widget.data.md5));
+    final isBookExist = ref.watch(checkIdExists(widget.data.md5));  // ダウンロードが必要なときは変なレスポンスがかえってこないか確認するためhashを仕込む
 
     return isBookExist.when(
       data: (isExists) {

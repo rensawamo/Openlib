@@ -16,6 +16,8 @@ class ResultPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //  FutureProvider.family
+    // .autoDispose<List<BookData>,
     final searchBooks = ref.watch(searchProvider(searchQuery));
 
     return Scaffold(

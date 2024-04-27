@@ -24,6 +24,9 @@ class TrendingPage extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
             child: CustomScrollView(
+              // default の スクロールの挙動を変更する
+              // ios: BouncingScrollPhysics
+             // android: ClampingScrollPhysics
               physics: const BouncingScrollPhysics(),
               slivers: [
                 const SliverToBoxAdapter(
@@ -32,6 +35,7 @@ class TrendingPage extends ConsumerWidget {
                 SliverPadding(
                   padding: const EdgeInsets.all(5),
                   sliver: SliverGrid(
+                    // grid 調節ui 
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -39,6 +43,7 @@ class TrendingPage extends ConsumerWidget {
                       crossAxisSpacing: 13.0,
                       mainAxisExtent: 205,
                     ),
+                    // SliverChildBuilderDelegate : スクロールでグリッド内のアイテムを動的に作成
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                         return InkWell(
